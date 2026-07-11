@@ -1,53 +1,40 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
+function convertTemperature(){
 
-body{
-    background:#f0f8ff;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-}
+    let temp = parseFloat(document.getElementById("temperature").value);
+    let unit = document.getElementById("unit").value;
+    let result = "";
 
-.container{
-    background:#fff;
-    padding:30px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,0.2);
-    text-align:center;
-    width:320px;
-}
+    if(isNaN(temp)){
+        document.getElementById("result").innerHTML="Please enter a valid temperature.";
+        return;
+    }
 
-h1{
-    margin-bottom:20px;
-    color:#333;
-}
+    if(unit=="C"){
 
-input,select,button{
-    width:100%;
-    padding:10px;
-    margin:10px 0;
-    font-size:16px;
-}
+        let f=(temp*9/5)+32;
+        let k=temp+273.15;
 
-button{
-    background:#007bff;
-    color:white;
-    border:none;
-    cursor:pointer;
-    border-radius:5px;
-}
+        result="Fahrenheit : "+f.toFixed(2)+" °F<br>";
+        result+="Kelvin : "+k.toFixed(2)+" K";
+    }
 
-button:hover{
-    background:#0056b3;
-}
+    else if(unit=="F"){
 
-#result{
-    margin-top:20px;
-    font-size:18px;
-    font-weight:bold;
+        let c=(temp-32)*5/9;
+        let k=c+273.15;
+
+        result="Celsius : "+c.toFixed(2)+" °C<br>";
+        result+="Kelvin : "+k.toFixed(2)+" K";
+    }
+
+    else{
+
+        let c=temp-273.15;
+        let f=(c*9/5)+32;
+
+        result="Celsius : "+c.toFixed(2)+" °C<br>";
+        result+="Fahrenheit : "+f.toFixed(2)+" °F";
+    }
+
+    document.getElementById("result").innerHTML=result;
 }
